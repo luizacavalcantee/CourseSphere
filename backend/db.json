@@ -1,0 +1,98 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Ana Silva",
+      "email": "ana.silva@email.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "name": "Bruno Costa",
+      "email": "bruno.costa@email.com",
+      "password": "password123"
+    },
+    {
+      "id": 3,
+      "name": "Carla Dias",
+      "email": "carla.dias@email.com",
+      "password": "password123"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "React Avançado: Hooks e Performance",
+      "description": "Aprenda a fundo os hooks do React e como otimizar suas aplicações para máxima performance.",
+      "start_date": "2025-08-01",
+      "end_date": "2025-09-30",
+      "creator_id": 1,
+      "instructors": [1, 2]
+    },
+    {
+      "id": 2,
+      "name": "Node.js para Iniciantes",
+      "description": "Crie APIs robustas do zero com Node.js, Express e as melhores práticas do mercado.",
+      "start_date": "2025-08-15",
+      "end_date": "2025-10-15",
+      "creator_id": 2,
+      "instructors": [2, 3]
+    },
+    {
+      "id": 3,
+      "name": "Fundamentos de UI/UX Design",
+      "description": null,
+      "start_date": "2025-09-01",
+      "end_date": "2025-09-20",
+      "creator_id": 1,
+      "instructors": [1]
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Introdução aos Hooks",
+      "status": "published",
+      "publish_date": "2025-08-05",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "course_id": 1,
+      "creator_id": 1
+    },
+    {
+      "id": 2,
+      "title": "State Management com Context API",
+      "status": "published",
+      "publish_date": "2025-08-12",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "course_id": 1,
+      "creator_id": 1
+    },
+    {
+      "id": 3,
+      "title": "Otimizando com useMemo e useCallback",
+      "status": "draft",
+      "publish_date": "2025-08-20",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "course_id": 1,
+      "creator_id": 2
+    },
+    {
+      "id": 4,
+      "title": "Configurando o Ambiente Node.js",
+      "status": "published",
+      "publish_date": "2025-08-18",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "course_id": 2,
+      "creator_id": 2
+    },
+    {
+      "id": 5,
+      "title": "Criando um servidor com Express",
+      "status": "archived",
+      "publish_date": "2025-08-25",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "course_id": 2,
+      "creator_id": 2
+    }
+  ]
+}
