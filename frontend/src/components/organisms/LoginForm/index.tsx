@@ -7,6 +7,7 @@ import { User, EyeOff, Eye } from 'lucide-react';
 import { Logo } from '@/assets';
 import { Button } from '@/components/atoms/Button';
 import { FormField } from '@/components/molecules/FormField';
+import { useRouter } from 'next/navigation';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ export const LoginForm = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ export const LoginForm = () => {
       const data = await response.json();
       if (data.length > 0) {
         login(data[0]);
+        router.push('/dashboard');
       } else {
         setError('Email ou senha inválidos.');
       }
