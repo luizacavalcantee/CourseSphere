@@ -10,9 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "hsl(var(--primary))",
+        primaryHover: "hsl(var(--primary-hover))",
       },
-      fontFamily: {
-			},
     },
   },
   plugins: [],

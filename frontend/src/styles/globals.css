@@ -5,5 +5,7 @@
 @layer base {
   :root {
     --background: 0 0% 96%; /*#F5F5F5*/
+    --primary: 249, 69%, 51%; /*#462CD9*/
+    --primary-hover: 249, 69%, 41%; /*#3620b1*/
   }
 }
