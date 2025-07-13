@@ -1,7 +1,31 @@
-export default function Dashboard() {
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import { CourseList } from '@/components/organisms/CourseList';
+import { Header } from '@/components/organisms/Header';
+
+export default function DashboardPage() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  if (isLoading || !isAuthenticated) {
+    return <div className="flex items-center justify-center min-h-screen">Carregando...</div>;
+  }
+  
   return (
-    <div className="text-black flex items-center justify-center h-screen w-screen">
-      Bem Vindo ao CourseSphere!
+    <div>
+      <Header />
+      <main>
+        <CourseList />
+      </main>
     </div>
   );
 }
