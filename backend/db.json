@@ -41,7 +41,7 @@
     {
       "id": 3,
       "name": "Fundamentos de UI/UX Design",
-      "description": null,
+      "description": "Crie APIs robustas do zero com Node.js, Express e as melhores práticas do mercado.",
       "start_date": "2025-09-01",
       "end_date": "2025-09-20",
       "creator_id": 1,
