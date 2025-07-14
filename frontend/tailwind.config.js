@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: "hsl(var(--background))",
         primary: "hsl(var(--primary))",
         primaryHover: "hsl(var(--primary-hover))",
       },
