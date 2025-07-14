@@ -5,7 +5,7 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 }
 
 export const Label = ({ children, className, ...props }: LabelProps) => {
-  const baseClasses = "absolute -top-3 left-0 text-sm text-gray-500";
+  const baseClasses = "block text-sm font-medium text-gray-700";
   const combinedClasses = `${baseClasses} ${className}`;
 
   return (
