@@ -25,7 +25,7 @@ export const LoginForm = () => {
       const data = await response.json();
       if (data.length > 0) {
         login(data[0]);
-        router.push('/dashboard');
+        router.push('/');
       } else {
         setError('Email ou senha inválidos.');
       }
