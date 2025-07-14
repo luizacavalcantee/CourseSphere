@@ -1,19 +1,20 @@
-import { AuthProvider } from '@/contexts/AuthContext';
-import { Inter } from 'next/font/google';
-import type { Metadata } from 'next';
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 
-import '@/styles/globals.css';
+import "@/styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'CourseSphere',
-  description: 'Desafio prático',
+  title: "CourseSphere",
+  description: "Desafio prático",
   icons: {
     icon: [
       {
-        url: '/icons/icon.svg',
-        type: 'image/svg+xml',
+        url: "/icons/icon.svg",
+        type: "image/svg+xml",
       },
     ],
   },
@@ -27,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <Toaster position="top-right" />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
