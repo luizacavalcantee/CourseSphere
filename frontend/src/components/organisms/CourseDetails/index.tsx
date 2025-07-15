@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { Calendar, User as UserIcon } from "lucide-react";
 import { PageTitle } from "@/components/molecules/PageTitle";
+import { LessonList } from "../LessonList";
 
 interface Course {
   id: number;
@@ -83,8 +84,8 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
 
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Aulas do Curso</h2>
-        <div className="p-6 bg-gray-100 rounded-md text-center text-gray-500">
-          A lista de aulas com filtros e paginação será implementada aqui.
+        <div className="p-6 bg-background rounded-md text-center text-gray-500">
+          <LessonList courseId={courseId} courseCreatorId={course.creator_id} />
         </div>
       </div>
     </div>
