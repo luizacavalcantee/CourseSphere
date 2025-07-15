@@ -11,17 +11,9 @@ import { toast } from 'react-hot-toast';
 import { Input } from '@/components/atoms/Input';
 import { Label } from '@/components/atoms/Label';
 import { Button } from '@/components/atoms/Button';
+import type { Lesson } from '@/types';
 
 type LessonFormData = z.infer<typeof lessonSchema>;
-
-interface Lesson {
-  id: number;
-  title: string;
-  video_url?: string;
-  status: 'draft' | 'published' | 'archived';
-  publish_date: string;
-  creator_id: number;
-}
 
 interface LessonFormProps {
   courseId: string;

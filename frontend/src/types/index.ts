@@ -10,8 +10,8 @@ export interface Course {
   description: string | null;
   start_date: string;
   end_date: string;
-  creator_id: number | string;
-  instructors: (number | string)[];
+  creator_id: string;
+  instructors: string[];
 }
 
 export interface Lesson {
@@ -19,7 +19,7 @@ export interface Lesson {
   title: string;
   status: 'draft' | 'published' | 'archived';
   publish_date: string;
-  creator_id: number | string;
+  creator_id: string;
   video_url?: string;
-  course_id: number | string;
+  course_id: string;
 }

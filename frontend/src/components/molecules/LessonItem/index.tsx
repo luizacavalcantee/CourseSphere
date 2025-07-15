@@ -8,7 +8,7 @@ import type { Lesson } from '@/types';
 
 interface LessonItemProps {
   lesson: Lesson;
-  courseCreatorId: number;
+  courseCreatorId: string;
   onDeleteClick: (lesson: Lesson) => void;
 }
 

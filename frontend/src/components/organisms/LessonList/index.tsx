@@ -19,7 +19,7 @@ export const LessonList = ({
   courseCreatorId,
 }: {
   courseId: string;
-  courseCreatorId: number;
+  courseCreatorId: string;
 }) => {
   const { user } = useAuth();
 

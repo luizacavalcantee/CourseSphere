@@ -8,12 +8,7 @@ import React, {
   useEffect,
 } from "react";
 import { useRouter } from "next/navigation";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
+import type { User } from '@/types';
 
 interface AuthContextType {
   isAuthenticated: boolean;

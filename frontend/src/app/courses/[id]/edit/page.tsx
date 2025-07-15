@@ -5,16 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
 import { PageTitle } from "@/components/molecules/PageTitle";
-
-interface Course {
-  id: number;
-  name: string;
-  description: string | null;
-  start_date: string;
-  end_date: string;
-  creator_id: number;
-  instructors: number[];
-}
+import type { Course } from "@/types";
 
 export default function EditCoursePage({ params }: { params: { id: string } }) {
   const { user } = useAuth();

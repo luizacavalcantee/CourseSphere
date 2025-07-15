@@ -1,13 +1,6 @@
 import { CalendarIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-
-interface Course {
-  id: number;
-  name: string;
-  description: string | null;
-  start_date: string;
-  end_date: string;
-}
+import type { Course } from "@/types";
 
 interface CourseCardProps {
   course: Course;

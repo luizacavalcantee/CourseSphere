@@ -5,15 +5,7 @@ import { fetcher } from "@/lib/fetcher";
 import { useAuth } from "@/contexts/AuthContext";
 import { CourseCard } from "@/components/atoms/CourseCard";
 import Link from "next/link";
-
-interface Course {
-  id: number;
-  name: string;
-  description: string | null;
-  start_date: string;
-  end_date: string;
-  instructors: number[];
-}
+import type { Course } from '@/types';
 
 export const CourseList = () => {
   const { user } = useAuth();
