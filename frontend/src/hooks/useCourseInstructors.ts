@@ -77,32 +77,50 @@ export function useCourseInstructors(courseId: string) {
         [course, courseId, mutateCourse, mutateUsers]
     );
 
-    const handleRemoveInstructor = useCallback(
-        async (instructorIdToRemove: string) => {
-            if (!course) return;
-            setIsSubmitting(true);
+const handleRemoveInstructor = useCallback(
+  async (instructorIdToRemove: string) => {
+    if (!course || !allUsers) return;
 
-            const updatedInstructorIds = course.instructors.filter(
-                (id) => id !== instructorIdToRemove
-            );
+    if (instructorIdToRemove === course.creator_id) {
+      toast.error("O criador do curso não pode ser removido.");
+      return;
+    }
 
-            try {
-                await fetch(`http://localhost:3001/courses/${courseId}`, {
-                    method: "PATCH",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ instructors: updatedInstructorIds }),
-                });
+    setIsSubmitting(true);
 
-                toast.success("Instrutor removido com sucesso!");
-                mutateCourse();
-            } catch (error) {
-                toast.error("Falha ao remover o instrutor.");
-            } finally {
-                setIsSubmitting(false);
-            }
-        },
-        [course, courseId, mutateCourse]
+
+    const updatedInstructorIds = course.instructors.filter(
+      (id) => id !== instructorIdToRemove
     );
+
+    const removedInstructorName = allUsers.find(
+      (u) => u.id === instructorIdToRemove
+    )?.name;
+
+    mutateCourse(
+      { ...course, instructors: updatedInstructorIds },
+      false
+    );
+
+    try {
+      await fetch(`http://localhost:3001/courses/${courseId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ instructors: updatedInstructorIds }),
+      });
+
+      toast.success(
+        `${removedInstructorName || "Instrutor"} removido(a) com sucesso!`
+      );
+    } catch (error) {
+      toast.error("Falha ao remover o instrutor.");
+      mutateCourse(course, false);
+    } finally {
+      setIsSubmitting(false);
+    }
+  },
+  [course, allUsers, courseId, mutateCourse]
+);
 
     return {
         course,

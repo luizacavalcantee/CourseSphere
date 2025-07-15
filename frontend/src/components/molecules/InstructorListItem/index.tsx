@@ -5,7 +5,7 @@ import { Trash } from "lucide-react";
 
 interface InstructorListItemProps {
   instructor: User;
-  onRemove: (id: string) => void;
+  onRemove: (instructor: User) => void;
   disabled: boolean;
 }
 
@@ -18,7 +18,7 @@ export default function InstructorListItem({
     <li className="flex items-center justify-between p-3 bg-gray-50 rounded-md">
       <span className="font-medium w-full">{instructor.name}</span>
       <button
-        onClick={() => onRemove(instructor.id)}
+        onClick={() => onRemove(instructor)}
         disabled={disabled}
         aria-label={`Remover ${instructor.name}`}
       >

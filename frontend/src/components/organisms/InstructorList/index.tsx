@@ -5,7 +5,7 @@ import InstructorListItem from "@/components/molecules/InstructorListItem";
 
 interface InstructorListProps {
   instructors: User[];
-  onRemove: (id: string) => void;
+  onRemove: (instructor: User) => void;
   isLoading: boolean;
   isSubmitting: boolean;
 }

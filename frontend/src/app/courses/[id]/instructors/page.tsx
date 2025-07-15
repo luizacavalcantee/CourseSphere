@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 import useSWR from "swr";
+
+import type { User } from "@/types";
+import { NewInstructorData } from "@/components/organisms/CreateInstructorForm";
 import { useAuth } from "@/contexts/AuthContext";
 import { fetcher } from "@/lib/fetcher";
 import { useCourseInstructors } from "@/hooks/useCourseInstructors";
-import type { NewInstructorData } from "@/components/organisms/CreateInstructorForm";
+
 import { PageTitle } from "@/components/molecules/PageTitle";
 import { Modal } from "@/components/molecules/Modal";
 import { AlertTriangle } from "lucide-react";
 import InstructorList from "@/components/organisms/InstructorList";
 import AddInstructorSection from "@/components/organisms/AddInstructorSection";
 import CreateInstructorForm from "@/components/organisms/CreateInstructorForm";
+import { Button } from "@/components/atoms/Button";
 
 interface RandomUser {
   login: { uuid: string };
@@ -31,7 +35,10 @@ export default function ManageInstructorsPage({
 }) {
   const { id: courseId } = params;
   const { user: loggedInUser } = useAuth();
+
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [instructorToRemove, setInstructorToRemove] = useState<User | null>(null);
 
   const {
     course,
@@ -53,6 +60,7 @@ export default function ManageInstructorsPage({
     fetcher,
     { revalidateOnFocus: false }
   );
+
 
   const handleAddSuggestedInstructor = async (suggestedUser: RandomUser) => {
     const success = await createAndAddInstructor({
@@ -81,6 +89,23 @@ export default function ManageInstructorsPage({
     }
   };
 
+  const handleOpenConfirmModal = (instructor: User) => {
+    setInstructorToRemove(instructor);
+    setIsConfirmModalOpen(true);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setIsConfirmModalOpen(false);
+    setInstructorToRemove(null);
+  };
+
+  const handleConfirmRemove = async () => {
+    if (instructorToRemove) {
+      await handleRemoveInstructor(instructorToRemove.id);
+      handleCloseConfirmModal();
+    }
+  };
+
   if (courseDataError) return <p>Erro ao carregar os dados do curso.</p>;
   if (!loggedInUser) return <p>Faça login para continuar.</p>;
 
@@ -105,7 +130,7 @@ export default function ManageInstructorsPage({
 
         <InstructorList
           instructors={currentInstructors}
-          onRemove={handleRemoveInstructor}
+          onRemove={handleOpenConfirmModal} // Alterado para a função que abre o modal
           isLoading={isCourseDataLoading}
           isSubmitting={isSubmitting}
         />
@@ -130,6 +155,35 @@ export default function ManageInstructorsPage({
           onSubmit={handleFormSubmit}
           onCancel={() => setIsCreateModalOpen(false)}
         />
+      </Modal>
+
+      <Modal
+        isOpen={isConfirmModalOpen}
+        onClose={handleCloseConfirmModal}
+        title="Confirmar Remoção"
+      >
+        {instructorToRemove && (
+          <div className="space-y-4">
+            <p>
+              Você tem certeza que deseja remover o instrutor{" "}
+              <strong className="font-semibold">{instructorToRemove.name}</strong>?
+            </p>
+            <p className="text-sm text-gray-600">
+              Esta ação não pode ser desfeita.
+            </p>
+            <div className="flex justify-end gap-3 pt-4">
+              <Button variant="secondary" onClick={handleCloseConfirmModal}>
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleConfirmRemove}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Removendo..." : "Confirmar Remoção"}
+              </Button>
+            </div>
+          </div>
+        )}
       </Modal>
     </>
   );
