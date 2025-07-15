@@ -72,7 +72,7 @@ export default function CreateInstructorForm({
           Cancelar
         </Button>
         <Button type="submit" variant="primary" disabled={isSubmitting}>
-          {isSubmitting ? "Criando..." : "Criar e Adicionar"}
+          {isSubmitting ? "Criando..." : "Salvar"}
         </Button>
       </div>
     </form>
