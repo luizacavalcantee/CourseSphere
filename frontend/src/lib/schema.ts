@@ -6,3 +6,12 @@ export const courseSchema = z.object({
   start_date: z.string().min(1, { message: "A data de início é obrigatória." }),
   end_date: z.string().min(1, { message: "A data de término é obrigatória." }),
 });
+
+export const lessonSchema = z.object({
+  title: z.string().min(3, { message: "O título da aula deve ter no mínimo 3 caracteres." }),
+  video_url: z.string().url({ message: "Por favor, insira uma URL válida." }).optional().or(z.literal('')),
+  status: z.enum(['draft', 'published', 'archived'], {
+    errorMap: () => ({ message: 'Por favor, selecione um status.' }),
+  }),
+  publish_date: z.string().min(1, { message: "A data de publicação é obrigatória." }),
+});
