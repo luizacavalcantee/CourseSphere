@@ -11,7 +11,7 @@ import { toast } from "react-hot-toast";
 import { Input } from "@/components/atoms/Input";
 import { Label } from "@/components/atoms/Label";
 import { Button } from "@/components/atoms/Button";
-import { Select } from "@/components/atoms/Select"; // 1. Importe o seu componente Select
+import { Select } from "@/components/atoms/Select";
 import type { Lesson } from "@/types";
 
 type LessonFormData = z.infer<typeof lessonSchema>;
@@ -43,7 +43,6 @@ export const LessonForm = ({ courseId, lesson }: LessonFormProps) => {
   });
 
   const onSubmit = async (data: LessonFormData) => {
-    // ...sua lógica de onSubmit permanece a mesma...
     if (new Date(data.publish_date) < new Date()) {
       toast.error("A data de publicação não pode ser no passado.");
       return;
@@ -72,7 +71,7 @@ export const LessonForm = ({ courseId, lesson }: LessonFormProps) => {
       toast.success(
         isEditMode ? "Aula atualizada!" : "Aula criada com sucesso!"
       );
-      router.push(`/courses/${courseId}`);
+      router.back();
       router.refresh();
     } catch (error) {
       toast.error((error as Error).message);
@@ -106,7 +105,6 @@ export const LessonForm = ({ courseId, lesson }: LessonFormProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <Label htmlFor="status">Status</Label>
-          {/* 2. Substitua o <select> pelo seu componente <Select> */}
           <Select id="status" {...register("status")}>
             <option value="draft">Rascunho</option>
             <option value="published">Publicada</option>

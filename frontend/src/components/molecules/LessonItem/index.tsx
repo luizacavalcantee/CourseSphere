@@ -5,11 +5,13 @@ import { useAuth } from '@/contexts/AuthContext';
 import { getVideoThumbnail } from '@/utils/videoUtils';
 import Image from 'next/image';
 import type { Lesson } from '@/types';
+import Link from 'next/link';
 
 interface LessonItemProps {
   lesson: Lesson;
   courseCreatorId: string;
   onDeleteClick: (lesson: Lesson) => void;
+  courseId: string;
 }
 
 const statusStyles = {
@@ -18,7 +20,7 @@ const statusStyles = {
   archived: { text: 'Arquivada', bg: 'bg-orange-100', textColor: 'text-orange-800' },
 };
 
-export const LessonItem = ({ lesson, courseCreatorId, onDeleteClick }: LessonItemProps) => {
+export const LessonItem = ({ lesson, courseCreatorId, onDeleteClick, courseId }: LessonItemProps) => {
   const { user } = useAuth();
   const style = statusStyles[lesson.status];
   const canEditOrDelete = String(user?.id) === String(lesson.creator_id) || String(user?.id) === String(courseCreatorId);
@@ -69,9 +71,11 @@ return (
         <div className="flex items-center gap-4">
           {canEditOrDelete && (
             <>
-              <button className="text-gray-500 hover:text-primary transition-colors" aria-label="Editar aula">
-                <FilePenLine size={18} />
-              </button>
+              <Link href={`/courses/${courseId}/lessons/${lesson.id}/edit`}>
+                <button className="text-gray-500 hover:text-primary transition-colors" aria-label="Editar aula">
+                  <FilePenLine size={18} />
+                </button>
+              </Link>
               <button 
                 onClick={() => onDeleteClick(lesson)}
                 className="text-gray-500 hover:text-red-600 transition-colors" 

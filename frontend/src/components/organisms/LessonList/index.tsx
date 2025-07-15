@@ -130,6 +130,7 @@ return (
                   lesson={lesson} 
                   courseCreatorId={courseCreatorId}
                   onDeleteClick={handleOpenDeleteModal}
+                  courseId={courseId}
                 />
               ))}
             </div>
@@ -147,7 +148,7 @@ return (
         <p>Você tem certeza que deseja excluir a aula "{lessonToDelete?.title}"?</p>
         <p className="text-sm text-black mt-2">Esta ação não pode ser desfeita.</p>
         <div className="flex justify-end gap-4 mt-6">
-          <Button onClick={handleCloseDeleteModal} className="bg-white border-2 border-red-700 hover:bg-gray-100 text-red-700">
+          <Button variant="secondary" onClick={handleCloseDeleteModal} className="bg-white border-2 border-red-700 hover:bg-gray-100 text-red-700">
             Cancelar
           </Button>
           <Button onClick={handleConfirmDelete} className="bg-red-600 hover:bg-red-700">
