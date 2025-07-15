@@ -26,10 +26,10 @@
       "description": "Aprenda a fundo os hooks do React e como otimizar suas aplicações para máxima performance.",
       "start_date": "2025-08-01",
       "end_date": "2025-09-30",
-      "creator_id": 2,
+      "creator_id": "2",
       "instructors": [
-        1,
-        2
+        "1",
+        "2"
       ]
     },
     {
@@ -38,10 +38,10 @@
       "description": "Crie APIs robustas do zero com Node.js, Express e as melhores práticas do mercado.",
       "start_date": "2025-08-15",
       "end_date": "2025-10-15",
-      "creator_id": 2,
+      "creator_id": "2",
       "instructors": [
-        2,
-        3
+        "2",
+        "3"
       ]
     },
     {
@@ -50,10 +50,32 @@
       "description": "Crie APIs robustas do zero com Node.js, Express e as melhores práticas do mercado.",
       "start_date": "2025-09-01",
       "end_date": "2025-09-20",
-      "creator_id": 2,
+      "creator_id": "2",
       "instructors": [
-        2
+        "2"
       ]
+    },
+    {
+      "id": "68ee",
+      "name": "teste",
+      "description": "teste",
+      "start_date": "2025-07-16",
+      "end_date": "2025-07-28",
+      "creator_id": "2",
+      "instructors": [
+        "2"
+      ]
+    },
+    {
+      "name": "funcionou",
+      "description": "dihvoejv",
+      "start_date": "2025-07-23",
+      "end_date": "2025-07-30",
+      "creator_id": "2",
+      "instructors": [
+        "2"
+      ],
+      "id": "ff52"
     }
   ],
   "lessons": [
@@ -63,8 +85,8 @@
       "status": "published",
       "publish_date": "2025-08-05",
       "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "course_id": 1,
-      "creator_id": 1
+      "course_id": "1",
+      "creator_id": "1"
     },
     {
       "id": "2",
@@ -72,8 +94,8 @@
       "status": "published",
       "publish_date": "2025-08-12",
       "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "course_id": 1,
-      "creator_id": 1
+      "course_id": "1",
+      "creator_id": "1"
     },
     {
       "id": "3",
@@ -81,8 +103,8 @@
       "status": "draft",
       "publish_date": "2025-08-20",
       "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "course_id": 1,
-      "creator_id": 2
+      "course_id": "1",
+      "creator_id": "2"
     },
     {
       "id": "4",
@@ -90,8 +112,8 @@
       "status": "published",
       "publish_date": "2025-08-18",
       "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "course_id": 2,
-      "creator_id": 2
+      "course_id": "2",
+      "creator_id": "2"
     },
     {
       "id": "5",
@@ -99,8 +121,8 @@
       "status": "archived",
       "publish_date": "2025-08-25",
       "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "course_id": 2,
-      "creator_id": 2
+      "course_id": "2",
+      "creator_id": "2"
     }
   ]
 }

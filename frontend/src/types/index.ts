@@ -1,11 +1,11 @@
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
 }
 
 export interface Course {
-  id: number | string;
+  id: string;
   name: string;
   description: string | null;
   start_date: string;
@@ -15,7 +15,7 @@ export interface Course {
 }
 
 export interface Lesson {
-  id: number | string;
+  id: string;
   title: string;
   status: 'draft' | 'published' | 'archived';
   publish_date: string;
