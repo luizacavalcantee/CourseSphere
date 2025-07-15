@@ -69,7 +69,7 @@ return (
         <div className="flex items-center gap-4">
           {canEditOrDelete && (
             <>
-              <button className="text-gray-500 hover:text-indigo-600 transition-colors" aria-label="Editar aula">
+              <button className="text-gray-500 hover:text-primary transition-colors" aria-label="Editar aula">
                 <FilePenLine size={18} />
               </button>
               <button 

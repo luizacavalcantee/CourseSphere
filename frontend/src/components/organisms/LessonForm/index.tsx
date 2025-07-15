@@ -106,7 +106,7 @@ export const LessonForm = ({ courseId, lesson }: LessonFormProps) => {
         </div>
       </div>
 
-      <Button type="submit" disabled={isSubmitting} className="bg-indigo-600 disabled:bg-indigo-300">
+      <Button type="submit" disabled={isSubmitting} className="bg-primary disabled:bg-primary/70">
         {isSubmitting ? 'Salvando...' : (isEditMode ? 'Salvar Aula' : 'Criar Aula')}
       </Button>
     </form>

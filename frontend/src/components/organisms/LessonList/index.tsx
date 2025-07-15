@@ -11,6 +11,8 @@ import { Modal } from "@/components/molecules/Modal";
 import { Button } from "@/components/atoms/Button";
 import { toast } from "react-hot-toast";
 import type { Lesson } from '@/types';
+import { Input } from "@/components/atoms/Input";
+import { Select } from "@/components/atoms/Select";
 
 export const LessonList = ({
   courseId,
@@ -99,23 +101,24 @@ return (
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <input
+          <Input
             type="text"
-            placeholder="Título"
+            placeholder="Procurando alguma aula específica? Digite aqui"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:border-primary"
+            className="w-full border-primaryLight"
+
           />
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="w-full md:w-1/3 px-4 py-2 bg-white border border-gray-300 rounded-md focus:border-primary"
-          >
-            <option value="all">Status</option>
-            <option value="draft">Em Rascunho</option>
-            <option value="published">Publicada</option>
-            <option value="archived">Arquivada</option>
-          </select>
+          <Select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="md:w-1/3"
+          >
+            <option value="all">Status</option>
+            <option value="draft">Em Rascunho</option>
+            <option value="published">Publicada</option>
+            <option value="archived">Arquivada</option>
+          </Select>
         </div>
 
         <div className="bg-white rounded-md shadow-sm">

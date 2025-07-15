@@ -59,7 +59,7 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
         {isCreator && (
           <Link
             href={`/courses/${course.id}/edit`}
-            className="px-4 ml-auto py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-colors whitespace-nowrap"
+            className="px-4 ml-auto py-2 font-semibold text-white bg-primary rounded-md hover:bg-primaryHover transition-colors whitespace-nowrap"
           >
             Editar Curso
           </Link>

@@ -13,6 +13,7 @@ module.exports = {
         background: "hsl(var(--background))",
         primary: "hsl(var(--primary))",
         primaryHover: "hsl(var(--primary-hover))",
+        primaryLight: "hsl(var(--primary-light))",
       },
     },
   },
