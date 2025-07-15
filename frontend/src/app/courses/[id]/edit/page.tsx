@@ -24,10 +24,10 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
     return <div className="text-center p-8">Curso não encontrado ou falha ao carregar.</div>;
   }
 
-  if (user?.id !== course.creator_id) {
+  if (String(user?.id) !== String(course.creator_id)) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-red-600">Acesso Negado</h1>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-red-600">Acesso Negado</h1>
         <p className="mt-2 text-gray-600">
           Você não tem permissão para editar este curso.
         </p>
@@ -36,9 +36,11 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center mx-16 my-8">
-      <PageTitle title="Editar Curso" />
-      <div className="w-full mx-auto p-8 bg-white rounded-lg shadow-md">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-8">
+        <PageTitle title="Editar Curso" />
+      </div>
+      <div className="w-full mx-auto p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
         <CourseForm course={course} />
       </div>
     </div>

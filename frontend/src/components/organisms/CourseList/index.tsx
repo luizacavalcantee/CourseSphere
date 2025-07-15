@@ -38,12 +38,12 @@ export const CourseList = () => {
   const paginatedCourses = userCourses.slice(startIndex, endIndex);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-3xl font-semibold text-black">Seus Cursos</h2>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-black">Seus Cursos</h2>
         <Link
           href="/courses/new"
-          className="px-4 py-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600 transition-colors"
+          className="w-full sm:w-auto px-4 py-2 text-center font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600 transition-colors"
         >
           Criar Novo Curso
         </Link>

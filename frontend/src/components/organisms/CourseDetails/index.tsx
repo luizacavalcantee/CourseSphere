@@ -83,9 +83,11 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
   };
 
   if (courseLoading || usersLoading)
-    return <p>Carregando detalhes do curso...</p>;
-  if (courseError || usersError) return <p>Falha ao carregar os dados.</p>;
-  if (!course || !users) return <p>Curso ou usuários não encontrados.</p>;
+    return <p className="text-center p-8">Carregando detalhes do curso...</p>;
+  if (courseError || usersError)
+    return <p className="text-center p-8 text-red-500">Falha ao carregar os dados.</p>;
+  if (!course || !users)
+    return <p className="text-center p-8">Curso ou usuários não encontrados.</p>;
 
   const courseInstructors = users.filter((u) =>
     course.instructors.includes(u.id)
@@ -96,19 +98,18 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
 
   return (
     <>
-      <div className="bg-white p-8 rounded-lg shadow-md">
-        <div className="flex justify-between items-start mb-4">
+      <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
           <PageTitle title={course.name} />
-
           {isCreator && (
-            <div className="flex items-center gap-3 ml-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto flex-shrink-0">
               <Link href={`/courses/${course.id}/edit`}>
-                <Button variant="primary">
+                <Button variant="primary" className="w-full">
                   <Pencil size={16} className="mr-2" />
                   Editar
                 </Button>
               </Link>
-              <Button onClick={() => setIsDeleteModalOpen(true)} variant="red">
+              <Button onClick={() => setIsDeleteModalOpen(true)} variant="red" className="w-full">
                 <Trash2 size={16} className="mr-2" />
                 Excluir
               </Button>
@@ -116,7 +117,7 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
           )}
         </div>
 
-        <div className="flex items-center gap-6 text-gray-600 mb-6 border-b pb-4">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-gray-600 mb-6 border-b pb-4 text-sm sm:text-base">
           <div className="flex items-center gap-2">
             <Calendar size={16} /> De {formatDate(course.start_date)} até{" "}
             {formatDate(course.end_date)}
@@ -124,7 +125,7 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
         </div>
 
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex flex-col items-start sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
             <h2 className="text-xl font-semibold">Instrutores</h2>
             {isCreator && (
               <Link
@@ -154,13 +155,13 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
         </div>
 
         <div className="prose max-w-none mb-8">
-          <h2 className="text-2xl font-semibold mb-2">Descrição</h2>
+          <h2 className="text-xl md:text-2xl font-semibold mb-2">Descrição</h2>
           <p>{course.description || "Nenhuma descrição fornecida."}</p>
         </div>
 
         <div className="mt-8">
-          <h2 className="text-2xl font-semibold mb-4">Aulas do Curso</h2>
-          <div className="p-6 bg-background rounded-md">
+          <h2 className="text-xl md:text-2xl font-semibold mb-4">Aulas do Curso</h2>
+          <div className="p-4 sm:p-6 bg-gray-50 rounded-md">
             <LessonList
               courseId={courseId}
               courseCreatorId={course.creator_id}
@@ -174,15 +175,15 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
         onClose={() => setIsDeleteModalOpen(false)}
         title="Confirmar Exclusão"
       >
-        <p className="text-justify">
+        <p className="text-gray-700">
           Você tem certeza que deseja excluir o curso "
           <strong>{course.name}</strong>"?
         </p>
-        <p className="text-sm text-gray-600 mt-2 text-justify">
+        <p className="text-sm text-gray-600 mt-2">
           Todas as aulas associadas a este curso também serão perdidas. Esta
           ação não pode ser desfeita.
         </p>
-        <div className="flex justify-end gap-4 mt-6">
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-6">
           <Button
             variant="secondary"
             className="border-2 border-red-700 text-red-700"
@@ -192,7 +193,7 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
           </Button>
           <Button
             onClick={handleConfirmDelete}
-            className="bg-red-600 hover:bg-red-700"
+            variant="red"
           >
             Confirmar
           </Button>

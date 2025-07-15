@@ -31,7 +31,7 @@ export const LessonList = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [lessonToDelete, setLessonToDelete] = useState<Lesson | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const LESSONS_PER_PAGE = 6;
+  const LESSONS_PER_PAGE = 5;
 
   const apiUrl = `http://localhost:3001/lessons?course_id=${courseId}`;
   const {
@@ -90,15 +90,19 @@ export const LessonList = ({
   if (isLoading)
     return <p className="text-center text-gray-500 py-4">Carregando aulas...</p>;
   if (error)
-    return <p className="text-center text-red-500 py-4">Falha ao carregar as aulas.</p>;
+    return (
+      <p className="text-center text-red-500 py-4">
+        Falha ao carregar as aulas.
+      </p>
+    );
 
   return (
     <>
       <div className="rounded-lg">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center mb-6 gap-4">
           <Link
             href={`/courses/${courseId}/lessons/new`}
-            className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors"
+            className="flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2 text-sm font-semibold text-white bg-primary rounded-md hover:bg-primaryHover transition-colors"
           >
             <PlusCircle size={18} />
             ADICIONAR AULA
@@ -111,21 +115,21 @@ export const LessonList = ({
             placeholder="Procurando alguma aula específica? Digite aqui"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full border-primaryLight"
+            className="w-full"
           />
           <Select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="md:w-1/3 border-primaryLight text-gray-400"
+            className="w-full md:w-56 flex-shrink-0"
           >
-            <option value="all">Status</option>
+            <option value="all">Filtrar por Status</option>
             <option value="draft">Em Rascunho</option>
             <option value="published">Publicada</option>
             <option value="archived">Arquivada</option>
           </Select>
         </div>
 
-        <div className="bg-white rounded-md shadow-sm">
+        <div className="bg-white rounded-md border border-gray-200">
           {paginatedLessons.length > 0 ? (
             <div>
               {paginatedLessons.map((lesson) => (
@@ -139,9 +143,9 @@ export const LessonList = ({
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500 p-10">
-              Nenhuma aula encontrada com os filtros atuais.
-            </p>
+            <div className="text-center text-gray-500 p-6 md:p-10">
+              <p>Nenhuma aula encontrada com os filtros atuais.</p>
+            </div>
           )}
         </div>
 
@@ -161,24 +165,18 @@ export const LessonList = ({
         onClose={handleCloseDeleteModal}
         title="Confirmar Exclusão"
       >
-        <p className="text-justify">
-          Você tem certeza que deseja excluir a aula "<strong>{lessonToDelete?.title}</strong>"?
+        <p className="text-gray-700">
+          Você tem certeza que deseja excluir a aula "
+          <strong>{lessonToDelete?.title}</strong>"?
         </p>
-        <p className="text-sm text-gray-600 mt-2 text-justify">
+        <p className="text-sm text-gray-600 mt-2">
           Esta ação não pode ser desfeita.
         </p>
-        <div className="flex justify-end gap-4 mt-6">
-          <Button
-            variant="secondary"
-            onClick={handleCloseDeleteModal}
-            className="bg-white border-2 border-red-700 hover:bg-gray-100 text-red-700"
-          >
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-6">
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
             Cancelar
           </Button>
-          <Button
-            onClick={handleConfirmDelete}
-            className="bg-red-600 hover:bg-red-700"
-          >
+          <Button variant="red" onClick={handleConfirmDelete}>
             Excluir
           </Button>
         </div>

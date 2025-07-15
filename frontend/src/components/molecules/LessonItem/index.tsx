@@ -31,14 +31,14 @@ export const LessonItem = ({ lesson, courseCreatorId, onDeleteClick, courseId }:
     return new Date(dateString).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
   };
 
-return (
-    <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200 last:border-b-0 hover:bg-gray-50">
-      <div className="flex items-center gap-4">
+  return (
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 bg-white border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors">
+      <div className="flex items-center gap-4 w-full">
         <a 
           href={lesson.video_url} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="relative flex-shrink-0 w-32 h-20 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden group"
+          className="relative flex-shrink-0 w-28 sm:w-32 h-16 sm:h-20 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden group"
         >
           {thumbnailUrl ? (
             <>
@@ -60,15 +60,15 @@ return (
         
         <div>
           <h4 className="font-semibold text-gray-800 text-base">{lesson.title}</h4>
-          <p className="text-sm text-gray-500">Data de publicação: {formatDate(lesson.publish_date)}</p>
+          <p className="text-sm text-gray-500 mt-1">Publicada em: {formatDate(lesson.publish_date)}</p>
         </div>
       </div>
       
-      <div className="flex items-center gap-6">
-        <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${style.bg} ${style.textColor}`}>
+      <div className="flex items-center justify-between w-full md:w-auto md:gap-6">
+        <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap ${style.bg} ${style.textColor}`}>
           {style.text}
         </span>
-        <div className="flex items-center gap-4 h-4">
+        <div className="flex items-center gap-4">
           {canEditOrDelete && (
             <>
               <Link href={`/courses/${courseId}/lessons/${lesson.id}/edit`}>
