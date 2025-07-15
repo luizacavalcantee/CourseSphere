@@ -56,26 +56,15 @@
       ]
     },
     {
-      "id": "68ee",
+      "id": "9b36",
       "name": "teste",
       "description": "teste",
-      "start_date": "2025-07-16",
-      "end_date": "2025-07-28",
-      "creator_id": "2",
+      "start_date": "2025-07-26",
+      "end_date": "2025-07-29",
+      "creator_id": "1",
       "instructors": [
-        "2"
+        "1"
       ]
-    },
-    {
-      "name": "funcionou",
-      "description": "dihvoejv",
-      "start_date": "2025-07-23",
-      "end_date": "2025-07-30",
-      "creator_id": "2",
-      "instructors": [
-        "2"
-      ],
-      "id": "ff52"
     }
   ],
   "lessons": [
@@ -116,12 +105,21 @@
       "creator_id": "2"
     },
     {
-      "id": "5",
       "title": "Criando um servidor com Express",
-      "status": "archived",
+      "video_url": "https://www.youtube.com/watch?v=xAWDqdpOlu8",
+      "status": "published",
       "publish_date": "2025-08-25",
-      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "course_id": "2",
+      "creator_id": "2",
+      "id": "5"
+    },
+    {
+      "id": "a218",
+      "title": "teste exclui",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "status": "draft",
+      "publish_date": "2025-07-23",
+      "course_id": "1",
       "creator_id": "2"
     }
   ]
