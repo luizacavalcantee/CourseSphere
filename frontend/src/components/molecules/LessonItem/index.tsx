@@ -68,17 +68,15 @@ return (
         <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${style.bg} ${style.textColor}`}>
           {style.text}
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 h-4">
           {canEditOrDelete && (
             <>
               <Link href={`/courses/${courseId}/lessons/${lesson.id}/edit`}>
-                <button className="text-gray-500 hover:text-primary transition-colors" aria-label="Editar aula">
-                  <FilePenLine size={18} />
-                </button>
+                <FilePenLine size={18} className='text-primary hover:text-primaryHover transition-colors' />
               </Link>
               <button 
                 onClick={() => onDeleteClick(lesson)}
-                className="text-gray-500 hover:text-red-600 transition-colors" 
+                className="text-red-500 hover:text-red-700 transition-colors" 
                 aria-label="Excluir aula"
               >
                 <Trash2 size={18} />

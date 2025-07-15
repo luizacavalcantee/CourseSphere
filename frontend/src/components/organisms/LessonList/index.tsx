@@ -49,8 +49,6 @@ export const LessonList = ({
     });
   }, [lessons, searchTerm, statusFilter]);
 
-  const canCreateLesson = String(user?.id) === String(courseCreatorId);
-
   const handleOpenDeleteModal = (lesson: Lesson) => {
     setLessonToDelete(lesson);
     setIsDeleteModalOpen(true);
@@ -92,7 +90,6 @@ export const LessonList = ({
     <>
       <div className="rounded-lg">
         <div className="flex justify-between items-center mb-4">
-          {canCreateLesson && (
             <Link
               href={`/courses/${courseId}/lessons/new`}
               className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors"
@@ -100,7 +97,6 @@ export const LessonList = ({
               <PlusCircle size={18} />
               ADICIONAR AULA
             </Link>
-          )}
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -114,7 +110,7 @@ export const LessonList = ({
           <Select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="md:w-1/3 border-primaryLight"
+            className="md:w-1/3 border-primaryLight text-gray-400"
           >
             <option value="all">Status</option>
             <option value="draft">Em Rascunho</option>
