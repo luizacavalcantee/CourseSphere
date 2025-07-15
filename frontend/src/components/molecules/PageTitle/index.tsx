@@ -14,12 +14,14 @@ export const PageTitle = ({ title }: PageTitleProps) => {
     <div className="flex items-center gap-3 w-full mb-6">
       <button
         onClick={() => router.back()}
-        className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+        className="p-2 rounded-full hover:bg-gray-100 transition-colors"
         aria-label="Voltar para a página anterior"
       >
-        <ArrowLeft size={24} strokeWidth={3} className="text-gray-900" />
+        <ArrowLeft size={22} strokeWidth={2.5} className="text-gray-700" />
       </button>
-      <h1 className="text-3xl font-semibold text-gray-900">{title}</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 truncate">
+        {title}
+      </h1>
     </div>
   );
 };

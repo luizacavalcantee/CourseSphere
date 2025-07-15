@@ -88,7 +88,9 @@ export const LessonList = ({
   };
 
   if (isLoading)
-    return <p className="text-center text-gray-500 py-4">Carregando aulas...</p>;
+    return (
+      <p className="text-center text-gray-500 py-4">Carregando aulas...</p>
+    );
   if (error)
     return (
       <p className="text-center text-red-500 py-4">
@@ -173,7 +175,11 @@ export const LessonList = ({
           Esta ação não pode ser desfeita.
         </p>
         <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-6">
-          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+          <Button
+            variant="secondary"
+            className="border-2 border-red-700 text-red-700"
+            onClick={handleCloseDeleteModal}
+          >
             Cancelar
           </Button>
           <Button variant="red" onClick={handleConfirmDelete}>

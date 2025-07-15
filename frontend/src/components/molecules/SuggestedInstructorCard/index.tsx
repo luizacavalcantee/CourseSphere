@@ -8,7 +8,7 @@ interface RandomUser {
   login: { uuid: string };
   name: { first: string; last: string };
   email: string;
-  picture: { thumbnail: string };
+  picture: { thumbnail:string };
 }
 
 interface SuggestedInstructorCardProps {
@@ -23,20 +23,19 @@ export default function SuggestedInstructorCard({
   disabled,
 }: SuggestedInstructorCardProps) {
   return (
-    <div className="text-center p-4 border rounded-lg space-y-3 flex flex-col justify-between">
-      <div className="flex flex-col gap-1">
+    <div className="text-center p-4 border border-gray-200 rounded-lg space-y-4 flex flex-col justify-between h-full hover:shadow-lg hover:border-primary transition-all duration-300">
+      <div className="flex flex-col items-center gap-1">
         <Avatar
           src={instructor.picture.thumbnail}
           alt={`${instructor.name.first} ${instructor.name.last}`}
           size="medium"
-          className="mx-auto"
         />
-        <p className="font-semibold mt-2">{`${instructor.name.first} ${instructor.name.last}`}</p>
-        <p className="text-xs text-gray-500 break-all">{instructor.email}</p>
+        <p className="font-semibold text-sm sm:text-base mt-2">{`${instructor.name.first} ${instructor.name.last}`}</p>
+        <p className="text-xs text-gray-500 break-all w-full">{instructor.email}</p>
       </div>
       <Button
         variant="primary"
-        className="w-full mt-4"
+        className="w-full"
         onClick={() => onAdd(instructor)}
         disabled={disabled}
       >

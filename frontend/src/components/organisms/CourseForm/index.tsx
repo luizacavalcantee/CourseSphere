@@ -39,12 +39,8 @@ export const CourseForm = ({ course }: CourseFormProps) => {
   });
 
   const onSubmit = async (data: CourseFormData) => {
-    console.log("Dados válidos, enviando:", data);
-
     const payload = {
       ...data,
-      start_date: data.start_date,
-      end_date: data.end_date,
       creator_id: isEditMode ? course.creator_id : user?.id,
       instructors: isEditMode ? course.instructors : [user?.id],
     };
@@ -93,7 +89,7 @@ export const CourseForm = ({ course }: CourseFormProps) => {
       </div>
 
       <div>
-        <Label htmlFor="description">Descrição (Opcional)</Label>
+        <Label htmlFor="description">Descrição</Label>
         <Textarea id="description" {...register("description")} rows={4} />
         {errors.description && (
           <p className="mt-1 text-sm text-red-500">
@@ -133,11 +129,12 @@ export const CourseForm = ({ course }: CourseFormProps) => {
         </div>
       </div>
 
-      <div className="flex gap-4 mt-4">
+      <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-4 pt-4 border-t border-gray-200">
         <Button
           type="button"
           variant="secondary"
-          onClick={() => router.push("/")}
+          onClick={() => router.back()}
+          disabled={isSubmitting}
         >
           Cancelar
         </Button>

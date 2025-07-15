@@ -38,7 +38,9 @@ export default function ManageInstructorsPage({
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [instructorToRemove, setInstructorToRemove] = useState<User | null>(null);
+  const [instructorToRemove, setInstructorToRemove] = useState<User | null>(
+    null
+  );
 
   const {
     course,
@@ -60,7 +62,6 @@ export default function ManageInstructorsPage({
     fetcher,
     { revalidateOnFocus: false }
   );
-
 
   const handleAddSuggestedInstructor = async (suggestedUser: RandomUser) => {
     const success = await createAndAddInstructor({
@@ -106,49 +107,57 @@ export default function ManageInstructorsPage({
     }
   };
 
-  if (courseDataError) return <p>Erro ao carregar os dados do curso.</p>;
-  if (!loggedInUser) return <p>Faça login para continuar.</p>;
+  if (courseDataError)
+    return <div className="text-center p-8">Erro ao carregar os dados.</div>;
+  if (isCourseDataLoading)
+    return <div className="text-center p-8">Carregando...</div>;
+  if (!loggedInUser)
+    return <div className="text-center p-8">Faça login para continuar.</div>;
 
-  if (!isCourseDataLoading && !isCreator) {
+  if (!isCreator) {
     return (
-      <div className="text-center p-8 bg-red-50 rounded-lg">
-        <AlertTriangle className="mx-auto h-12 w-12 text-red-400" />
-        <h2 className="mt-4 text-xl font-semibold text-red-800">
-          Acesso Negado
-        </h2>
-        <p className="mt-2 text-red-700">
-          Apenas o criador do curso pode gerenciar os instrutores.
-        </p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-2xl mx-auto text-center p-6 sm:p-8 bg-red-50 rounded-lg">
+          <AlertTriangle className="mx-auto h-12 w-12 text-red-400" />
+          <h2 className="mt-4 text-lg sm:text-xl font-semibold text-red-800">
+            Acesso Negado
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-red-700">
+            Apenas o criador do curso pode gerenciar os instrutores.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
     <>
-      <div className="bg-white p-8 rounded-lg shadow-md space-y-8">
-        <PageTitle title={`Gerenciar Instrutores: ${course?.name || "Carregando..."}`} />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg space-y-6 md:space-y-8">
+          <PageTitle title={`Gerenciar Instrutores: ${course?.name || ""}`} />
 
-        <InstructorList
-          instructors={currentInstructors}
-          onRemove={handleOpenConfirmModal} // Alterado para a função que abre o modal
-          isLoading={isCourseDataLoading}
-          isSubmitting={isSubmitting}
-        />
+          <InstructorList
+            instructors={currentInstructors}
+            onRemove={handleOpenConfirmModal}
+            isLoading={isCourseDataLoading}
+            isSubmitting={isSubmitting}
+          />
 
-        <AddInstructorSection
-          suggestions={suggestions?.results}
-          suggestionsError={suggestionsError}
-          isSubmitting={isSubmitting}
-          onOpenCreateModal={() => setIsCreateModalOpen(true)}
-          onRefreshSuggestions={mutateSuggestions}
-          onAddSuggested={handleAddSuggestedInstructor}
-        />
+          <AddInstructorSection
+            suggestions={suggestions?.results}
+            suggestionsError={suggestionsError}
+            isSubmitting={isSubmitting}
+            onOpenCreateModal={() => setIsCreateModalOpen(true)}
+            onRefreshSuggestions={mutateSuggestions}
+            onAddSuggested={handleAddSuggestedInstructor}
+          />
+        </div>
       </div>
 
       <Modal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
-        title="Criar Novo Instrutor Manualmente"
+        title="Criar Novo Instrutor"
       >
         <CreateInstructorForm
           isSubmitting={isSubmitting}
@@ -166,20 +175,28 @@ export default function ManageInstructorsPage({
           <div className="space-y-4">
             <p>
               Você tem certeza que deseja remover o instrutor{" "}
-              <strong className="font-semibold">{instructorToRemove.name}</strong>?
+              <strong className="font-semibold">
+                {instructorToRemove.name}
+              </strong>
+              ?
             </p>
             <p className="text-sm text-gray-600">
               Esta ação não pode ser desfeita.
             </p>
-            <div className="flex justify-end gap-3 pt-4">
-              <Button variant="secondary" onClick={handleCloseConfirmModal}>
+            <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4">
+              <Button
+                variant="secondary"
+                className="border-2 border-red-700 text-red-700"
+                onClick={handleCloseConfirmModal}
+              >
                 Cancelar
               </Button>
               <Button
+                variant="red"
                 onClick={handleConfirmRemove}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Removendo..." : "Confirmar Remoção"}
+                {isSubmitting ? "Removendo..." : "Confirmar"}
               </Button>
             </div>
           </div>
