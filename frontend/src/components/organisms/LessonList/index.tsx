@@ -112,7 +112,7 @@ return (
           <Select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="md:w-1/3"
+            className="md:w-1/3 border-primaryLight"
           >
             <option value="all">Status</option>
             <option value="draft">Em Rascunho</option>
