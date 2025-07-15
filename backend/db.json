@@ -27,7 +27,10 @@
       "start_date": "2025-08-01",
       "end_date": "2025-09-01",
       "creator_id": "u1a2",
-      "instructors": ["u1a2", "u3b4"]
+      "instructors": [
+        "u1a2",
+        "u3b4"
+      ]
     },
     {
       "id": "c202",
@@ -36,7 +39,9 @@
       "start_date": "2025-09-05",
       "end_date": "2025-10-05",
       "creator_id": "u3b4",
-      "instructors": ["u3b4"]
+      "instructors": [
+        "u3b4"
+      ]
     },
     {
       "id": "c303",
@@ -45,7 +50,10 @@
       "start_date": "2025-10-10",
       "end_date": "2025-11-15",
       "creator_id": "u5c6",
-      "instructors": ["u5c6", "u1a2"]
+      "instructors": [
+        "u5c6",
+        "u1a2"
+      ]
     },
     {
       "id": "c404",
@@ -54,7 +62,119 @@
       "start_date": "2025-07-20",
       "end_date": "2025-08-20",
       "creator_id": "u1a2",
-      "instructors": ["u1a2"]
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "0cc1",
+      "name": "teste1",
+      "description": "teste",
+      "start_date": "2025-07-16",
+      "end_date": "2025-07-17",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "a1b8",
+      "name": "teste2",
+      "description": "teste",
+      "start_date": "2025-07-16",
+      "end_date": "2025-07-17",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "a00c",
+      "name": "teste3",
+      "description": "teste",
+      "start_date": "2025-07-17",
+      "end_date": "2025-07-25",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "cfd5",
+      "name": "teste4",
+      "description": "teste",
+      "start_date": "2025-07-23",
+      "end_date": "2025-07-25",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "name": "teste 5",
+      "description": "teste",
+      "start_date": "2025-07-17",
+      "end_date": "2025-07-31",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ],
+      "id": "20f2"
+    },
+    {
+      "id": "01dc",
+      "name": "teste 5",
+      "description": "teste",
+      "start_date": "2025-07-23",
+      "end_date": "2025-07-31",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "9f32",
+      "name": "teste7",
+      "description": "gestd",
+      "start_date": "2025-07-17",
+      "end_date": "2025-07-29",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "c6c5",
+      "name": "teste 8",
+      "description": "erferf",
+      "start_date": "2025-07-25",
+      "end_date": "2025-07-30",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "fb7e",
+      "name": "teste 9",
+      "description": "djhfij",
+      "start_date": "2025-07-24",
+      "end_date": "2025-07-30",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
+    },
+    {
+      "id": "3020",
+      "name": "teste 10",
+      "description": "sdcfwd",
+      "start_date": "2025-07-16",
+      "end_date": "2025-07-29",
+      "creator_id": "u1a2",
+      "instructors": [
+        "u1a2"
+      ]
     }
   ],
   "lessons": [
@@ -62,6 +182,60 @@
       "id": "l001",
       "title": "JSX e Componentes",
       "status": "published",
+      "publish_date": "2025-08-02",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "creator_id": "u1a2",
+      "course_id": "c101"
+    },
+    {
+      "id": "l011",
+      "title": "teste1",
+      "status": "published",
+      "publish_date": "2025-08-02",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "creator_id": "u1a2",
+      "course_id": "c101"
+    },
+    {
+      "id": "l012",
+      "title": "teste2",
+      "status": "draft",
+      "publish_date": "2025-08-02",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "creator_id": "u1a2",
+      "course_id": "c101"
+    },
+    {
+      "id": "l013",
+      "title": "teste3",
+      "status": "published",
+      "publish_date": "2025-08-02",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "creator_id": "u1a2",
+      "course_id": "c101"
+    },
+    {
+      "id": "l014",
+      "title": "teste4",
+      "status": "draft",
+      "publish_date": "2025-08-02",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "creator_id": "u1a2",
+      "course_id": "c101"
+    },
+    {
+      "id": "l015",
+      "title": "teste5",
+      "status": "published",
+      "publish_date": "2025-08-02",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "creator_id": "u1a2",
+      "course_id": "c101"
+    },
+    {
+      "id": "l016",
+      "title": "teste6",
+      "status": "draft",
       "publish_date": "2025-08-02",
       "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "creator_id": "u1a2",

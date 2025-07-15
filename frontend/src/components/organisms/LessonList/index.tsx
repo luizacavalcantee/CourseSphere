@@ -1,18 +1,21 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
-import { useAuth } from "@/contexts/AuthContext";
-import { LessonItem } from "@/components/molecules/LessonItem";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
+import { toast } from "react-hot-toast";
+
+import { fetcher } from "@/lib/fetcher";
+import { useAuth } from "@/contexts/AuthContext";
+import type { Lesson } from "@/types";
+
+import { LessonItem } from "@/components/molecules/LessonItem";
 import { Modal } from "@/components/molecules/Modal";
 import { Button } from "@/components/atoms/Button";
-import { toast } from "react-hot-toast";
-import type { Lesson } from "@/types";
 import { Input } from "@/components/atoms/Input";
 import { Select } from "@/components/atoms/Select";
+import Pagination from "@/components/molecules/Pagination";
 
 export const LessonList = ({
   courseId,
@@ -27,6 +30,8 @@ export const LessonList = ({
   const [statusFilter, setStatusFilter] = useState("all");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [lessonToDelete, setLessonToDelete] = useState<Lesson | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const LESSONS_PER_PAGE = 6;
 
   const apiUrl = `http://localhost:3001/lessons?course_id=${courseId}`;
   const {
@@ -38,7 +43,6 @@ export const LessonList = ({
 
   const filteredLessons = useMemo(() => {
     if (!lessons) return [];
-
     return lessons.filter((lesson) => {
       const matchesSearch = lesson.title
         .toLowerCase()
@@ -48,6 +52,15 @@ export const LessonList = ({
       return matchesSearch && matchesStatus;
     });
   }, [lessons, searchTerm, statusFilter]);
+
+  const totalPages = Math.ceil(filteredLessons.length / LESSONS_PER_PAGE);
+  const startIndex = (currentPage - 1) * LESSONS_PER_PAGE;
+  const endIndex = startIndex + LESSONS_PER_PAGE;
+  const paginatedLessons = filteredLessons.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, statusFilter]);
 
   const handleOpenDeleteModal = (lesson: Lesson) => {
     setLessonToDelete(lesson);
@@ -61,7 +74,6 @@ export const LessonList = ({
 
   const handleConfirmDelete = async () => {
     if (!lessonToDelete) return;
-
     try {
       await fetch(`http://localhost:3001/lessons/${lessonToDelete.id}`, {
         method: "DELETE",
@@ -76,27 +88,21 @@ export const LessonList = ({
   };
 
   if (isLoading)
-    return (
-      <p className="text-center text-gray-500 py-4">Carregando aulas...</p>
-    );
+    return <p className="text-center text-gray-500 py-4">Carregando aulas...</p>;
   if (error)
-    return (
-      <p className="text-center text-red-500 py-4">
-        Falha ao carregar as aulas.
-      </p>
-    );
+    return <p className="text-center text-red-500 py-4">Falha ao carregar as aulas.</p>;
 
   return (
     <>
       <div className="rounded-lg">
         <div className="flex justify-between items-center mb-4">
-            <Link
-              href={`/courses/${courseId}/lessons/new`}
-              className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors"
-            >
-              <PlusCircle size={18} />
-              ADICIONAR AULA
-            </Link>
+          <Link
+            href={`/courses/${courseId}/lessons/new`}
+            className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors"
+          >
+            <PlusCircle size={18} />
+            ADICIONAR AULA
+          </Link>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -120,9 +126,9 @@ export const LessonList = ({
         </div>
 
         <div className="bg-white rounded-md shadow-sm">
-          {filteredLessons.length > 0 ? (
+          {paginatedLessons.length > 0 ? (
             <div>
-              {filteredLessons.map((lesson) => (
+              {paginatedLessons.map((lesson) => (
                 <LessonItem
                   key={lesson.id}
                   lesson={lesson}
@@ -138,6 +144,16 @@ export const LessonList = ({
             </p>
           )}
         </div>
+
+        {totalPages > 1 && (
+          <div className="mt-8 flex justify-center">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </div>
+        )}
       </div>
 
       <Modal
