@@ -1,29 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
-import { Calendar, User as UserIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { Calendar, User as UserIcon, Trash2, Pencil } from "lucide-react";
 import { PageTitle } from "@/components/molecules/PageTitle";
 import { LessonList } from "../LessonList";
-
-interface Course {
-  id: number;
-  name: string;
-  description: string | null;
-  start_date: string;
-  end_date: string;
-  creator_id: number;
-  instructors: number[];
-}
-interface User {
-  id: number;
-  name: string;
-}
+import { Modal } from "@/components/molecules/Modal";
+import { Button } from "@/components/atoms/Button";
+import type { Course, User } from "@/types";
 
 export const CourseDetails = ({ courseId }: { courseId: string }) => {
   const { user } = useAuth();
+  const router = useRouter();
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const {
     data: course,
@@ -37,56 +32,123 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
     isLoading: usersLoading,
   } = useSWR<User[]>("http://localhost:3001/users", fetcher);
 
+  const isCreator =
+    user && course && String(user.id) === String(course.creator_id);
+
+  const handleConfirmDelete = async () => {
+    if (!course) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3001/courses/${course.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Falha ao excluir o curso.");
+      }
+
+      toast.success("Curso excluído com sucesso!");
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      toast.error((error as Error).message);
+    } finally {
+      setIsDeleteModalOpen(false);
+    }
+  };
+
   if (courseLoading || usersLoading)
     return <p>Carregando detalhes do curso...</p>;
   if (courseError || usersError) return <p>Falha ao carregar os dados.</p>;
-  if (!course) return <p>Curso não encontrado.</p>;
+  if (!course || !users) return <p>Curso ou usuários não encontrados.</p>;
 
   const instructorNames = users
-    ?.filter((u) => course.instructors.includes(u.id))
+    .filter((u) => course.instructors.includes(u.id))
     .map((u) => u.name)
     .join(", ");
 
-  const isCreator = String(user?.id) === String(course.creator_id);
   const formatDate = (dateString: string) =>
     new Date(dateString).toLocaleDateString("pt-BR", { timeZone: "UTC" });
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md">
-      <div className="flex items-start mb-4">
-        <PageTitle title={course.name} />
+    <>
+      <div className="bg-white p-8 rounded-lg shadow-md">
+        <div className="flex justify-between items-start mb-4">
+          <PageTitle title={course.name} />
 
-        {isCreator && (
-          <Link
-            href={`/courses/${course.id}/edit`}
-            className="px-4 ml-auto py-2 font-semibold text-white bg-primary rounded-md hover:bg-primaryHover transition-colors whitespace-nowrap"
+          {isCreator && (
+            <div className="flex items-center gap-3 ml-auto">
+              <Link href={`/courses/${course.id}/edit`}>
+                <Button variant="primary">
+                  <Pencil size={16} className="mr-2" />
+                  Editar
+                </Button>
+              </Link>
+              <Button onClick={() => setIsDeleteModalOpen(true)} variant="red">
+                <Trash2 size={16} className="mr-2" />
+                Excluir
+              </Button>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center gap-6 text-gray-600 mb-6 border-b pb-4">
+          <div className="flex items-center gap-2">
+            <Calendar size={16} /> De {formatDate(course.start_date)} até{" "}
+            {formatDate(course.end_date)}
+          </div>
+          <div className="flex items-center gap-2">
+            <UserIcon size={16} /> Instrutores: {instructorNames || "Nenhum"}
+          </div>
+        </div>
+
+        <div className="prose max-w-none">
+          <h2 className="text-2xl font-semibold mb-2">Descrição</h2>
+          <p>{course.description || "Nenhuma descrição fornecida."}</p>
+        </div>
+
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold mb-4">Aulas do Curso</h2>
+          <div className="p-6 bg-background rounded-md">
+            <LessonList
+              courseId={courseId}
+              courseCreatorId={course.creator_id}
+            />
+          </div>
+        </div>
+      </div>
+
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        title="Confirmar Exclusão"
+      >
+        <p>
+          Você tem certeza que deseja excluir o curso "
+          <strong>{course.name}</strong>"?
+        </p>
+        <p className="text-sm text-gray-600 mt-2">
+          Todas as aulas associadas a este curso também serão perdidas. Esta
+          ação não pode ser desfeita.
+        </p>
+        <div className="flex justify-end gap-4 mt-6">
+          <Button
+            variant="secondary"
+            onClick={() => setIsDeleteModalOpen(false)}
           >
-            Editar Curso
-          </Link>
-        )}
-      </div>
-
-      <div className="flex items-center gap-6 text-gray-600 mb-6 border-b pb-4">
-        <div className="flex items-center gap-2">
-          <Calendar size={16} /> De {formatDate(course.start_date)} até{" "}
-          {formatDate(course.end_date)}
+            Cancelar
+          </Button>
+          <Button
+            onClick={handleConfirmDelete}
+            className="bg-red-600 hover:bg-red-700"
+          >
+            Sim, Excluir Curso
+          </Button>
         </div>
-        <div className="flex items-center gap-2">
-          <UserIcon size={16} /> Instrutores: {instructorNames || "Nenhum"}
-        </div>
-      </div>
-
-      <div className="prose max-w-none">
-        <h2 className="text-2xl font-semibold mb-2">Descrição</h2>
-        <p>{course.description || "Nenhuma descrição fornecida."}</p>
-      </div>
-
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Aulas do Curso</h2>
-        <div className="p-6 bg-background rounded-md text-center text-gray-500">
-          <LessonList courseId={courseId} courseCreatorId={course.creator_id} />
-        </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
