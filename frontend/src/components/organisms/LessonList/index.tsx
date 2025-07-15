@@ -10,7 +10,7 @@ import { PlusCircle } from "lucide-react";
 import { Modal } from "@/components/molecules/Modal";
 import { Button } from "@/components/atoms/Button";
 import { toast } from "react-hot-toast";
-import type { Lesson } from '@/types';
+import type { Lesson } from "@/types";
 import { Input } from "@/components/atoms/Input";
 import { Select } from "@/components/atoms/Select";
 
@@ -88,12 +88,15 @@ export const LessonList = ({
       </p>
     );
 
-return (
+  return (
     <>
       <div className="rounded-lg">
         <div className="flex justify-between items-center mb-4">
           {canCreateLesson && (
-            <Link href={`/courses/${courseId}/lessons/new`} className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors">
+            <Link
+              href={`/courses/${courseId}/lessons/new`}
+              className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors"
+            >
               <PlusCircle size={18} />
               ADICIONAR AULA
             </Link>
@@ -107,27 +110,26 @@ return (
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full border-primaryLight"
-
           />
           <Select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="md:w-1/3 border-primaryLight"
-          >
-            <option value="all">Status</option>
-            <option value="draft">Em Rascunho</option>
-            <option value="published">Publicada</option>
-            <option value="archived">Arquivada</option>
-          </Select>
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="md:w-1/3 border-primaryLight"
+          >
+            <option value="all">Status</option>
+            <option value="draft">Em Rascunho</option>
+            <option value="published">Publicada</option>
+            <option value="archived">Arquivada</option>
+          </Select>
         </div>
 
         <div className="bg-white rounded-md shadow-sm">
           {filteredLessons.length > 0 ? (
             <div>
-              {filteredLessons.map(lesson => (
-                <LessonItem 
-                  key={lesson.id} 
-                  lesson={lesson} 
+              {filteredLessons.map((lesson) => (
+                <LessonItem
+                  key={lesson.id}
+                  lesson={lesson}
                   courseCreatorId={courseCreatorId}
                   onDeleteClick={handleOpenDeleteModal}
                   courseId={courseId}
@@ -135,23 +137,36 @@ return (
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500 p-10">Nenhuma aula encontrada com os filtros atuais.</p>
+            <p className="text-center text-gray-500 p-10">
+              Nenhuma aula encontrada com os filtros atuais.
+            </p>
           )}
         </div>
       </div>
 
-      <Modal 
-        isOpen={isDeleteModalOpen} 
-        onClose={handleCloseDeleteModal} 
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
         title="Confirmar Exclusão"
       >
-        <p>Você tem certeza que deseja excluir a aula "{lessonToDelete?.title}"?</p>
-        <p className="text-sm text-black mt-2">Esta ação não pode ser desfeita.</p>
+        <p className="text-justify">
+          Você tem certeza que deseja excluir a aula "<strong>{lessonToDelete?.title}</strong>"?
+        </p>
+        <p className="text-sm text-gray-600 mt-2 text-justify">
+          Esta ação não pode ser desfeita.
+        </p>
         <div className="flex justify-end gap-4 mt-6">
-          <Button variant="secondary" onClick={handleCloseDeleteModal} className="bg-white border-2 border-red-700 hover:bg-gray-100 text-red-700">
+          <Button
+            variant="secondary"
+            onClick={handleCloseDeleteModal}
+            className="bg-white border-2 border-red-700 hover:bg-gray-100 text-red-700"
+          >
             Cancelar
           </Button>
-          <Button onClick={handleConfirmDelete} className="bg-red-600 hover:bg-red-700">
+          <Button
+            onClick={handleConfirmDelete}
+            className="bg-red-600 hover:bg-red-700"
+          >
             Excluir
           </Button>
         </div>

@@ -126,17 +126,18 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
         onClose={() => setIsDeleteModalOpen(false)}
         title="Confirmar Exclusão"
       >
-        <p>
+        <p className="text-justify">
           Você tem certeza que deseja excluir o curso "
           <strong>{course.name}</strong>"?
         </p>
-        <p className="text-sm text-gray-600 mt-2">
+        <p className="text-sm text-gray-600 mt-2 text-justify">
           Todas as aulas associadas a este curso também serão perdidas. Esta
           ação não pode ser desfeita.
         </p>
         <div className="flex justify-end gap-4 mt-6">
           <Button
             variant="secondary"
+            className="border-2 border-red-700 text-red-700"
             onClick={() => setIsDeleteModalOpen(false)}
           >
             Cancelar
@@ -145,7 +146,7 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
             onClick={handleConfirmDelete}
             className="bg-red-600 hover:bg-red-700"
           >
-            Sim, Excluir Curso
+            Confirmar
           </Button>
         </div>
       </Modal>
