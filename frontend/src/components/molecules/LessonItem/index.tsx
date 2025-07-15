@@ -23,7 +23,7 @@ const statusStyles = {
 export const LessonItem = ({ lesson, courseCreatorId }: { lesson: Lesson, courseCreatorId: number }) => {
   const { user } = useAuth();
   const style = statusStyles[lesson.status];
-  const canEditOrDelete = user?.id === lesson.creator_id || user?.id === courseCreatorId;
+  const canEditOrDelete = String(user?.id) === String(lesson.creator_id) || String(user?.id) === String(courseCreatorId);
 
   const thumbnailUrl = getVideoThumbnail(lesson.video_url ?? '');
 
@@ -71,10 +71,10 @@ export const LessonItem = ({ lesson, courseCreatorId }: { lesson: Lesson, course
         <div className="flex items-center gap-4">
           {canEditOrDelete && (
             <>
-              <button className="text-gray-500 hover:text-indigo-600 transition-colors" aria-label="Editar aula">
+              <button className="text-primary hover:text-primaryHover transition-colors" aria-label="Editar aula">
                 <FilePenLine size={18} />
               </button>
-              <button className="text-gray-500 hover:text-red-600 transition-colors" aria-label="Excluir aula">
+              <button className="text-red-500 hover:text-red-700 transition-colors" aria-label="Excluir aula">
                 <Trash2 size={18} />
               </button>
             </>

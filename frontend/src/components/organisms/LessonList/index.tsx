@@ -39,13 +39,13 @@ export const LessonList = ({ courseId, courseCreatorId }: { courseId: string, co
   if (isLoading) return <p className="text-center text-gray-500 py-4">Carregando aulas...</p>;
   if (error) return <p className="text-center text-red-500 py-4">Falha ao carregar as aulas.</p>;
   
-  const canCreateLesson = user?.id === courseCreatorId;
+  const canCreateLesson = String(user?.id) === String(courseCreatorId);
 
 return (
     <div className="rounded-lg">
       <div className="flex justify-between items-center mb-4">
         {canCreateLesson && (
-          <Link href={`/courses/${courseId}/lessons/new`} className="flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+          <Link href={`/courses/${courseId}/lessons/new`} className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primaryHover transition-colors">
             <PlusCircle size={18} />
             ADICIONAR AULA
           </Link>

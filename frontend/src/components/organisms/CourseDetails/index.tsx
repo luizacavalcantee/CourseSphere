@@ -47,8 +47,7 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
     .map((u) => u.name)
     .join(", ");
 
-  const isCreator = user?.id === course.creator_id;
-
+  const isCreator = String(user?.id) === String(course.creator_id);
   const formatDate = (dateString: string) =>
     new Date(dateString).toLocaleDateString("pt-BR", { timeZone: "UTC" });
 
