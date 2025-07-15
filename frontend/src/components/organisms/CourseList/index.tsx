@@ -6,7 +6,7 @@ import Link from "next/link";
 import { fetcher } from "@/lib/fetcher";
 import { useAuth } from "@/contexts/AuthContext";
 import type { Course } from "@/types";
-import { CourseCard } from "@/components/atoms/CourseCard";
+import { CourseCard } from "@/components/molecules/CourseCard";
 import Pagination from "@/components/molecules/Pagination";
 
 export const CourseList = () => {
