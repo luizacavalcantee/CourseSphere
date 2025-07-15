@@ -12,7 +12,7 @@ import { PageTitle } from "@/components/molecules/PageTitle";
 import { LessonList } from "../LessonList";
 import { Modal } from "@/components/molecules/Modal";
 import { Button } from "@/components/atoms/Button";
-import type { Course, User } from "@/types";
+import type { Course, User, Lesson } from "@/types";
 
 export const CourseDetails = ({ courseId }: { courseId: string }) => {
   const { user } = useAuth();
@@ -39,18 +39,40 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
     if (!course) return;
 
     try {
-      const response = await fetch(
+      const lessonsResponse = await fetch(
+        `http://localhost:3001/lessons?course_id=${course.id}`
+      );
+      if (!lessonsResponse.ok) {
+        throw new Error("Falha ao buscar as aulas do curso para exclusão.");
+      }
+      const lessonsToDelete: Lesson[] = await lessonsResponse.json();
+
+      const deleteLessonPromises = lessonsToDelete.map((lesson) =>
+        fetch(`http://localhost:3001/lessons/${lesson.id}`, {
+          method: "DELETE",
+        })
+      );
+
+      const lessonDeleteResults = await Promise.all(deleteLessonPromises);
+
+      for (const result of lessonDeleteResults) {
+        if (!result.ok) {
+          throw new Error("Ocorreu um erro ao excluir uma das aulas.");
+        }
+      }
+
+      const courseResponse = await fetch(
         `http://localhost:3001/courses/${course.id}`,
         {
           method: "DELETE",
         }
       );
 
-      if (!response.ok) {
+      if (!courseResponse.ok) {
         throw new Error("Falha ao excluir o curso.");
       }
 
-      toast.success("Curso excluído com sucesso!");
+      toast.success("Curso e suas aulas foram excluídos com sucesso!");
       router.push("/");
       router.refresh();
     } catch (error) {
