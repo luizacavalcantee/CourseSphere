@@ -25,7 +25,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
           <h3 className="mb-3 text-xl font-bold tracking-tight text-gray-800 group-hover:text-indigo-600 transition-colors">
             {course.name}
           </h3>
-          <p className="mb-4 font-normal text-gray-600 text-sm line-clamp-2">
+          <p className="font-normal text-gray-600 text-sm line-clamp-2">
             {course.description || "Este curso não possui uma descrição."}
           </p>
         </div>
