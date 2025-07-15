@@ -95,3 +95,37 @@ Siga os passos abaixo para rodar o projeto em seu ambiente local.
     A aplicação estará disponível em `http://localhost:3000`.
 
 Agora, basta acessar `http://localhost:3000` no seu navegador e utilizar a plataforma!
+
+---
+
+## 🖼️ Prints do Projeto
+
+### Tela de Login
+![Tela de Login](assets/login.png)
+
+### Dashboard com a Listagem de Cursos
+![Dashboard de Cursos](assets/courses.png)
+
+### Criação de um Novo Curso
+![Criação de Curso](assets/create-course.png)
+
+### Detalhes de um Curso
+![Detalhes do Curso](assets/course-details.png)
+
+### Listagem de Aulas de um Curso
+![Listagem de Aulas](assets/course-lessons.png)
+
+### Criação de uma Nova Aula
+![Criação de Aula](assets/create-lesson.png)
+
+### Edição de uma Aula
+![Edição de Aula](assets/edit-lesson.png)
+
+### Adicionando um Novo Instrutor
+![Adicionar Instrutor](assets/add-instructor.png)
+
+### Removendo um Instrutor
+![Remover Instrutor](assets/remove-instructor.png)
+
+### Tela de Acesso Negado
+![Acesso Negado](assets/access-denied.png)
