@@ -4,7 +4,6 @@ import { Avatar } from "@/components/atoms/Avatar";
 import { Button } from "@/components/atoms/Button";
 import { UserPlus } from "lucide-react";
 
-// Tipo para o usuário aleatório, necessário para as props do componente
 interface RandomUser {
   login: { uuid: string };
   name: { first: string; last: string };
@@ -12,7 +11,6 @@ interface RandomUser {
   picture: { thumbnail: string };
 }
 
-// Props que o componente receberá
 interface SuggestedInstructorCardProps {
   instructor: RandomUser;
   onAdd: (instructor: RandomUser) => void;
