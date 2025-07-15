@@ -87,10 +87,9 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
   if (courseError || usersError) return <p>Falha ao carregar os dados.</p>;
   if (!course || !users) return <p>Curso ou usuários não encontrados.</p>;
 
-  const instructorNames = users
-    .filter((u) => course.instructors.includes(u.id))
-    .map((u) => u.name)
-    .join(", ");
+  const courseInstructors = users.filter((u) =>
+    course.instructors.includes(u.id)
+  );
 
   const formatDate = (dateString: string) =>
     new Date(dateString).toLocaleDateString("pt-BR", { timeZone: "UTC" });
@@ -122,12 +121,39 @@ export const CourseDetails = ({ courseId }: { courseId: string }) => {
             <Calendar size={16} /> De {formatDate(course.start_date)} até{" "}
             {formatDate(course.end_date)}
           </div>
-          <div className="flex items-center gap-2">
-            <UserIcon size={16} /> Instrutores: {instructorNames || "Nenhum"}
+        </div>
+
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">Instrutores</h2>
+            {isCreator && (
+              <Link
+                href={`/courses/${course.id}/instructors`}
+                className="text-sm font-semibold text-sky-700 hover:text-sky-900 transition-colors"
+              >
+                GERENCIAR INSTRUTORES
+              </Link>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {courseInstructors.length > 0 ? (
+              courseInstructors.map((instructor) => (
+                <div
+                  key={instructor.id}
+                  className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium border border-gray-200"
+                >
+                  {instructor.name}
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500">
+                Nenhum instrutor atribuído a este curso.
+              </p>
+            )}
           </div>
         </div>
 
-        <div className="prose max-w-none">
+        <div className="prose max-w-none mb-8">
           <h2 className="text-2xl font-semibold mb-2">Descrição</h2>
           <p>{course.description || "Nenhuma descrição fornecida."}</p>
         </div>
